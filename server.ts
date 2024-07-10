@@ -1,7 +1,7 @@
 require("dotenv").config();
 import app from "./src/app";
 import { config } from "./src/config/config";
-import connectDb from "./src/config/db";
+import { connectDb } from "./src/config/db";
 
 const startServer = async () => {
     connectDb();

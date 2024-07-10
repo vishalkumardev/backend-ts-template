@@ -1,0 +1,36 @@
+services:
+  mongoserver:
+    image: mongo
+    container_name: mongodb-server
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME="root"
+      - MONGO_INITDB_ROOT_PASSWORD="root"
+    ports:
+     - "27018:27017"
+    restart: always  
+    volumes:
+      - ~/mongo/data:/data/db
+    networks:
+      - express-app
+
+
+
+  backendapi:
+        image: vishal7859/express-backend:v1
+        container_name: express-app
+        ports:
+          - 8000:8000
+        env_file: .env
+        depends_on:
+          - mongoserver
+        networks:
+          - express-app
+
+
+
+networks:
+     express-app:
+      driver: bridge
+         
+
+        
